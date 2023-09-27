@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <style>
+            .cont{
+                padding-top:100px;
+            }
+            button:hover{
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="cont">
+            <center>
+                <img id="image" src="img/trainstop.png"/><br><br>
+                <p style="color:blue;font-family:Arial, Helvetica, sans-serif;"><b>Click the following button to handle the Animation</b></p>
+                <button type="button" onclick="document.getElementById('image').src='img/trainstart.gif'">Start</button>
+                <button type="button" onclick="document.getElementById('image').src='img/trainstop.png'">Stop</button>
+            </center>
+        </div>
+    </body>
+</html>

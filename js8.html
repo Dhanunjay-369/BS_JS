@@ -1,0 +1,287 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JS-Task11</title>
+  </head>
+  <style>
+    * {
+      font-size: medium;
+    }
+    body {
+      display: grid;
+      place-content: center;
+    }
+    table {
+      background: rgb(219, 133, 180);
+      background: linear-gradient(
+        0deg,
+        rgba(219, 133, 180, 1) 12%,
+        rgba(240, 213, 191, 1) 74%,
+        rgba(244, 247, 196, 1) 100%
+      );
+      padding: 1rem 3rem;
+      width: 45rem;
+      height: 40rem;
+      margin: 0 auto;
+    }
+    label {
+      font-weight: bold;
+    }
+    input {
+      width: 70%;
+    }
+    button {
+      border: 2px solid black;
+      border-radius: 10px;
+      background-color: red;
+      
+      color: white;
+      font-weight: bold;
+    }
+    #button {
+        text-align: center;
+    }
+    button:hover{
+      cursor:pointer;
+    }
+  </style>
+  <body>
+    <table>
+      <tr>
+        <td colspan="2">
+          <h1 style="text-align: center; color: blue">Registraion Form</h1>
+        </td>
+      </tr>
+      <tr>
+        <td><label for="fname">First Name</label></td>
+        <td>
+          <input type="text" name="fname" id="firstname" onkeyup="validate('firstname','fnStatus')"/>
+          <span id="fnStatus"></span>
+        </td>
+      </tr>
+      <tr>
+        <td><label for="lname">Last Name: </label></td>
+        <td>
+          <input type="text" name="lname" id="lastname" onkeyup="validate('lastname','lnStatus')"/>
+          <span id="lnStatus"></span>
+        </td>
+      </tr>
+      <tr>
+        <td><label for="email">Email </label></td>
+        <td>
+          <input type="email" name="email" id="email" onkeyup="validate('email','emailStatus')"/>
+          <span id="emailStatus"></span>
+        </td>
+      </tr>
+      <tr>
+        <td><label for="password">Password: </label></td>
+        <td>
+          <input type="password" name="password" id="passw" onkeyup="validate('passw','passwStatus')"/>
+          <span id="passwStatus"></span>
+        </td>
+      </tr>
+      <tr>
+        <td><label for="repassword">Re-enter Password: </label></td>
+        <td>
+          <input type="password" name="repassword" id="repassw" onkeyup="validatePass('passw','repassw','matchStatus')"/>
+          <span id="matchStatus"></span>
+        </td>
+      </tr>
+      <tr>
+        <td><label for="gender">Gender:</label></td>
+        <td>
+          <input
+            style="width: fit-content"
+            type="radio"
+            name="gender"
+            id="male"
+            checked
+          />
+          Male
+          <br />
+          <input
+            style="width: fit-content"
+            type="radio"
+            name="gender"
+            id="male"
+          />
+          Female
+        </td>
+      </tr>
+      <tr>
+        <td><label for="age">Age</label></td>
+        <td><input type="text" name="age" id="age" onkeyup="validate('age','ageStatus')"/></td>
+        <span id="ageStatus"></span>
+      </tr>
+      <tr>
+        <td><label for="phone">Phone Number: </label></td>
+        <td>
+          <input type="tel" name="phone" id="phone" onkeyup="validateNum('phone','phoneStatus')"/>
+          <span id="phoneStatus"></span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label for="address">Address:</label>
+        </td>
+        <td>
+          <textarea
+            name="address"
+            id="addr"
+            cols="30"
+            rows="10"
+            onkeyup="validate('addr','addrStatus')"
+          ></textarea>
+          <span id="addrStatus"></span>
+        </td>
+      </tr>
+      <tr>
+        <td><label for="state">State</label></td>
+        <td><input type="text" name="state" id="state" onkeyup="validate('state','stateStatus')"/></td>
+        <span id="stateStatus"></span>
+      </tr>
+      <tr>
+        <td><label for="country">Country</label></td>
+        <td>
+          <select>
+            <option value="none">Choose your country</option>
+            <option value="india">India</option>
+            <option value="usa">USA</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label for="lang">Language Known</label>
+        </td>
+        <td>
+          <input
+            style="width: fit-content"
+            type="checkbox"
+            name="lang"
+            id="eng"
+          />
+          English
+          <input
+            style="width: fit-content"
+            type="checkbox"
+            name="lang"
+            id="kannada"
+          />
+          Kannada
+          <input
+            style="width: fit-content"
+            type="checkbox"
+            name="lang"
+            id="Hindi"
+          />
+          Hindi
+          <input
+            style="width: fit-content"
+            type="checkbox"
+            name="lang"
+            id="Telugu"
+          />
+          Telugu
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <input
+            style="width: fit-content"
+            type="checkbox"
+            name="declaration"
+          />
+          Hereby I declare all the given details are true
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <p style="text-align: right;">Log in to <a href="https://ethnus.com">Ethnus</a> website</p>
+        </td>
+      </tr>
+      <tr>
+        <td id="button" colspan="2">
+          <button class="button">Register</button>
+        </td>
+      </tr>
+    </table>
+  </body>
+  <script>
+    /*document.getElementById("passwordForm").addEventListener("submit", function (event) {
+        // ... Your existing form validation code ...
+
+        // Check if the password is less than or equal to 3 characters
+        var Input = document.getElementById("value");
+        var VError = document.getElementById("VError");
+
+        if (Input.value.length <= 3) {
+            VError.textContent = "Poor";
+            VError.style.color = "red";
+            event.preventDefault(); // Prevent form submission
+        } else {
+            VError.textContent = ""; // Clear the error message
+        }
+
+        // Check if the passwords match
+        var repasswordInput = document.getElementById("repassword");
+        var repasswordError = document.getElementById("repasswordError");
+
+        if (passwordInput.value !== repasswordInput.value) {
+            repasswordError.textContent = "Not Matching";
+            repasswordError.style.color = "red";
+            event.preventDefault(); // Prevent form submission
+        } else {
+            repasswordError.textContent = ""; // Clear the error message
+        }
+    });*/
+    function validate(fName,fStatus)
+    {
+      var value=document.getElementById(fName).value;
+      var status=document.getElementById(fStatus);
+      if(value.length<=3)
+      {
+        status.innerText="POOR";
+        status.style.color="red";
+      }
+      else
+      {
+        status.innerText="";
+      }
+    }
+    function validatePass(pass,repass,match)
+    {
+      var passw=document.getElementById(pass).value;
+      var rePassw=document.getElementById(repass).value;
+      var match=document.getElementById(match);
+      match.innerText="";
+      if(rePassw.length)
+      {
+        match.innerText+="POOR OR "
+      }
+      if(passw!=rePassw)
+      {
+        match.innerText+="MISMATCH";
+      }
+      match.style.color="red";
+    }
+    function validateNum(fName,fStatus)
+    {
+      var value=document.getElementById(fName).value;
+      //value=Number.parseInt(value);
+      var status=document.getElementById(fStatus);
+      //status=Number.parseInt(value);
+      if(value.length<=3)
+      {
+        status.innerText="POOR";
+        status.style.color="red";
+      }
+      else
+      {
+        status.innerText="";
+      }
+    }
+  </script>
+</html>
